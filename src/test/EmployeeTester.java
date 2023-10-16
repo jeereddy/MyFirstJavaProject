@@ -18,6 +18,9 @@ public class EmployeeTester {
         System.out.println(empList.stream().map(Employee::getDepartment).distinct().toList());
         empList.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
 
+        // What is the average age of male and female employees?
+        Map<String, Double> avgAgeByGender = empList.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.averagingInt(Employee::getAge)));
+        System.out.println("Average age by gender: "+ avgAgeByGender);
     }
 
     private static List<Employee> buildEmp() {
