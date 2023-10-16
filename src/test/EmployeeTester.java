@@ -2,6 +2,7 @@ package test;
 
 import main.pojo.Employee;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,15 @@ public class EmployeeTester {
         System.out.println("Get let of employe Name who joined after 2015: " + empList.stream().filter(e -> e.getYearOfJoining() > 2015).map(Employee::getName).toList());
         empList.stream().filter(e -> e.getYearOfJoining() > 2015).map(Employee::getName).forEach(System.out::println);
         System.out.println("==================================");
+        //Count the number of employees in each department?
+        Map<String, Long> groupByDepartment = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()));
+        System.out.println("Count the number of employees in each department: " + groupByDepartment);
+        Set<Map.Entry<String, Long>> entryS = groupByDepartment.entrySet();
+        for (Map.Entry<String, Long> entry : entryS) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+
     }
 
     private static List<Employee> buildEmp() {
