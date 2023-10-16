@@ -13,6 +13,11 @@ public class EmployeeTester {
         //How many male and female employees are there in the organization?
         Map<String, Long> noOfMAilAndFemail = empList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
         System.out.println("No Of male and female employees are there in the organization: " + noOfMAilAndFemail);
+
+        // Print the name of all departments in the organization?
+        System.out.println(empList.stream().map(Employee::getDepartment).distinct().toList());
+        empList.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
+
     }
 
     private static List<Employee> buildEmp() {
