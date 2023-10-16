@@ -25,6 +25,12 @@ public class EmployeeTester {
         System.out.println("higest paid employee in the organisation is: ");
         System.out.println(employeeOptional.get());
         System.out.println("==================================");
+        //Get the names of all employees who have joined after 2015?
+        System.out.println("Get List of employes who joined after 2015");
+        System.out.println(empList.stream().filter(e -> e.getYearOfJoining() > 2015).collect(Collectors.toList()));
+        System.out.println("Get let of employe Name who joined after 2015: " + empList.stream().filter(e -> e.getYearOfJoining() > 2015).map(Employee::getName).toList());
+        empList.stream().filter(e -> e.getYearOfJoining() > 2015).map(Employee::getName).forEach(System.out::println);
+        System.out.println("==================================");
     }
 
     private static List<Employee> buildEmp() {
