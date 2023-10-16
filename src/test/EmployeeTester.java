@@ -2,9 +2,7 @@ package test;
 
 import main.pojo.Employee;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EmployeeTester {
@@ -13,18 +11,24 @@ public class EmployeeTester {
         //How many male and female employees are there in the organization?
         Map<String, Long> noOfMAilAndFemail = empList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
         System.out.println("No Of male and female employees are there in the organization: " + noOfMAilAndFemail);
-
+        System.out.println("==================================");
         // Print the name of all departments in the organization?
         System.out.println(empList.stream().map(Employee::getDepartment).distinct().toList());
         empList.stream().map(Employee::getDepartment).distinct().forEach(System.out::println);
-
+        System.out.println("==================================");
         // What is the average age of male and female employees?
-        Map<String, Double> avgAgeByGender = empList.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.averagingInt(Employee::getAge)));
-        System.out.println("Average age by gender: "+ avgAgeByGender);
+        Map<String, Double> avgAgeByGender = empList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingInt(Employee::getAge)));
+        System.out.println("Average age by gender: " + avgAgeByGender);
+        System.out.println("==================================");
+        //Get the details of highest paid employee in the organization?
+        Optional<Employee> employeeOptional = empList.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
+        System.out.println("higest paid employee in the organisation is: ");
+        System.out.println(employeeOptional.get());
+        System.out.println("==================================");
     }
 
     private static List<Employee> buildEmp() {
-        List<Employee> employeeList = new ArrayList<Employee>();
+        List<Employee> employeeList = new ArrayList<>();
         employeeList.add(new Employee(111, "Jiya Brein", 32, "Female", "HR", 2011, 25000.0));
         employeeList.add(new Employee(122, "Paul Niksui", 25, "Male", "Sales And Marketing", 2015, 13500.0));
         employeeList.add(new Employee(133, "Martin Theron", 29, "Male", "Infrastructure", 2012, 18000.0));
