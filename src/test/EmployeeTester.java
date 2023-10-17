@@ -92,16 +92,23 @@ public class EmployeeTester {
         System.out.println("Total Sal: " + doubleSummaryStatistics.getSum());
         System.out.println("==================================");
         //Separate the employees who are younger or equal to 25 years from those employees who are older than 25 years
-       Map<Boolean, List<Employee>> groupByAgeMap= empList.stream().collect(Collectors.partitioningBy(employee -> employee.getAge()>25));
-        Set<Map.Entry<Boolean,List<Employee>>> groupByAgeMapEntry= groupByAgeMap.entrySet();
-        for (Map.Entry<Boolean,List<Employee>> emp:groupByAgeMapEntry){
-            if(emp.getKey()){
-                System.out.println("Employess Older than 25 Years: "+ emp.getValue().stream().map(Employee::getName).toList());
-            }else {
-                System.out.println("Employess younger or equal to 25 Years: "+ emp.getValue().stream().map(Employee::getName).toList());
+        Map<Boolean, List<Employee>> groupByAgeMap = empList.stream().collect(Collectors.partitioningBy(employee -> employee.getAge() > 25));
+        Set<Map.Entry<Boolean, List<Employee>>> groupByAgeMapEntry = groupByAgeMap.entrySet();
+        for (Map.Entry<Boolean, List<Employee>> emp : groupByAgeMapEntry) {
+            if (emp.getKey()) {
+                System.out.println("Employess Older than 25 Years: " + emp.getValue().stream().map(Employee::getName).toList());
+            } else {
+                System.out.println("Employess younger or equal to 25 Years: " + emp.getValue().stream().map(Employee::getName).toList());
             }
         }
         System.out.println("==================================");
+        //Who is the oldest employee in the organization? What is his age and which department he belongs to?
+        Optional<Employee> oldestEmployee = empList.stream().max(Comparator.comparingInt(Employee::getAge));
+        Employee oldestEmp = oldestEmployee.get();
+        System.out.println("Oldest Emp Name: " + oldestEmp.getName());
+        System.out.println("Oldest Emp Age: " + oldestEmp.getAge());
+        System.out.println("Oldest Emp Dep: " + oldestEmp.getDepartment());
+
     }
 
     private static List<Employee> buildEmp() {
