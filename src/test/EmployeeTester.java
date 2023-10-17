@@ -77,7 +77,14 @@ public class EmployeeTester {
             System.out.println(e.getKey() + ": " + e.getValue());
         }
         System.out.println("==================================");
-
+        //List down the names of all employees in each department?
+        Map<String, List<Employee>> empByDep = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+        Set<Map.Entry<String, List<Employee>>> empByDepEntry = empByDep.entrySet();
+        for (Map.Entry<String, List<Employee>> emp : empByDepEntry) {
+            System.out.println(emp.getKey() + ": " + emp.getValue().stream().map(Employee::getName).collect(Collectors.toList()));
+        }
+        System.out.println("==================================");
+        
     }
 
     private static List<Employee> buildEmp() {
