@@ -85,7 +85,11 @@ public class EmployeeTester {
         }
         System.out.println("==================================");
         //What is the average salary and total salary of the whole organization?
-        System.out.println("Summarizing the Emp sal: "+ empList.stream().collect(Collectors.summarizingDouble(Employee::getSalary)));
+        System.out.println("Summarizing the Emp sal: " + empList.stream().collect(Collectors.summarizingDouble(Employee::getSalary)));
+
+        DoubleSummaryStatistics doubleSummaryStatistics = empList.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
+        System.out.println("Average Sal: " + doubleSummaryStatistics.getAverage());
+        System.out.println("Total Sal: " + doubleSummaryStatistics.getSum());
 
     }
 
