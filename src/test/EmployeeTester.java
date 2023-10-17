@@ -50,11 +50,15 @@ public class EmployeeTester {
         }
         System.out.println("==================================");
         //Get the details of youngest male employee in the product development department?
-        Optional<Employee> youngestEmp = empList.stream().filter(emp->emp.getGender().equalsIgnoreCase("Male")&&emp.getDepartment().equalsIgnoreCase("Product Development"))
+        Optional<Employee> youngestEmp = empList.stream().filter(emp -> emp.getGender().equalsIgnoreCase("Male") && emp.getDepartment().equalsIgnoreCase("Product Development"))
                 .min(Comparator.comparingInt(Employee::getAge));
-                //.collect(Collectors.minBy(Comparator.comparingInt(Employee::getAge)));
-        System.out.println("youngest male employee in the product development department: "+youngestEmp);
+        //.collect(Collectors.minBy(Comparator.comparingInt(Employee::getAge)));
+        System.out.println("youngest male employee in the product development department: " + youngestEmp);
 
+        System.out.println("==================================");
+        //Who has the most working experience in the organization?
+        System.out.println("Most working Experience in the org By Min Method: " + empList.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)));
+        System.out.println("Most working Experience in the org By Sorted and findFirst Method: " + empList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst());
     }
 
     private static List<Employee> buildEmp() {
