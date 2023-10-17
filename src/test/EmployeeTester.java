@@ -48,6 +48,12 @@ public class EmployeeTester {
         for (Map.Entry<String, Double> avgSal : avgSalMapEntrySet) {
             System.out.println(avgSal.getKey() + ":  " + avgSal.getValue());
         }
+        System.out.println("==================================");
+        //Get the details of youngest male employee in the product development department?
+        Optional<Employee> youngestEmp = empList.stream().filter(emp->emp.getGender().equalsIgnoreCase("Male")&&emp.getDepartment().equalsIgnoreCase("Product Development"))
+                .min(Comparator.comparingInt(Employee::getAge));
+                //.collect(Collectors.minBy(Comparator.comparingInt(Employee::getAge)));
+        System.out.println("youngest male employee in the product development department: "+youngestEmp);
 
     }
 
