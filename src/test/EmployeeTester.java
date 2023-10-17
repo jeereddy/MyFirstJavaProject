@@ -59,6 +59,15 @@ public class EmployeeTester {
         //Who has the most working experience in the organization?
         System.out.println("Most working Experience in the org By Min Method: " + empList.stream().min(Comparator.comparingInt(Employee::getYearOfJoining)));
         System.out.println("Most working Experience in the org By Sorted and findFirst Method: " + empList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst());
+        System.out.println("==================================");
+        //How many male and female employees are there in the sales and marketing team?
+        Map<String, Long> mFMap = empList.stream().filter(emp1 -> emp1.getDepartment().equalsIgnoreCase("Sales And Marketing"))
+                .collect(Collectors.groupingBy(Employee::getGender, Collectors.counting()));
+        Set<Map.Entry<String, Long>> mfEntry = mFMap.entrySet();
+        System.out.println("No of male and female employees are there in the sales and marketing team: " + mFMap);
+        for (Map.Entry<String, Long> e : mfEntry) {
+            System.out.println(e.getKey() + ":" + e.getValue());
+        }
     }
 
     private static List<Employee> buildEmp() {
