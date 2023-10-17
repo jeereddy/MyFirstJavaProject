@@ -68,6 +68,16 @@ public class EmployeeTester {
         for (Map.Entry<String, Long> e : mfEntry) {
             System.out.println(e.getKey() + ":" + e.getValue());
         }
+        System.out.println("==================================");
+        // What is the average salary of male and female employees?
+        Map<String, Double> avgSalByGender = empList.stream().collect(Collectors.groupingBy(Employee::getGender, Collectors.averagingDouble(Employee::getSalary)));
+        System.out.println("Average salary of male and female employees: " + avgSalByGender);
+        Set<Map.Entry<String, Double>> avgSalByGenderEntry = avgSalByGender.entrySet();
+        for (Map.Entry<String, Double> e : avgSalByGenderEntry) {
+            System.out.println(e.getKey() + ": " + e.getValue());
+        }
+        System.out.println("==================================");
+
     }
 
     private static List<Employee> buildEmp() {
