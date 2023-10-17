@@ -39,7 +39,15 @@ public class EmployeeTester {
         for (Map.Entry<String, Long> entry : entryS) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
-
+        System.out.println("==================================");
+        //What is the average salary of each department?
+        System.out.println("Average salary of each department");
+        Map<String, Double> avgSalByDep = empList.stream().collect(Collectors.groupingBy(Employee::getDepartment, Collectors.averagingDouble(Employee::getSalary)));
+        System.out.println(avgSalByDep);
+        Set<Map.Entry<String, Double>> avgSalMapEntrySet = avgSalByDep.entrySet();
+        for (Map.Entry<String, Double> avgSal : avgSalMapEntrySet) {
+            System.out.println(avgSal.getKey() + ":  " + avgSal.getValue());
+        }
 
     }
 
